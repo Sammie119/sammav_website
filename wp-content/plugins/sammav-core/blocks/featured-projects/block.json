@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sammav/featured-projects",
+	"title": "Featured projects",
+	"category": "sammav",
+	"description": "Most recent projects marked as featured.",
+	"textdomain": "sammav-core",
+	"attributes": {
+		"count": {
+			"type": "number",
+			"default": 3
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
+	"render": "file:./render.php"
+}

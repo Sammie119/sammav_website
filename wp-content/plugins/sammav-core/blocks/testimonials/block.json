@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sammav/testimonials",
+	"title": "Testimonials",
+	"category": "sammav",
+	"description": "Client testimonials carousel.",
+	"textdomain": "sammav-core",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

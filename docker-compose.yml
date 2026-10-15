@@ -1,0 +1,62 @@
+name: sammav
+
+services:
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-sammav}
+      MARIADB_USER: ${DB_USER:-sammav}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-sammav}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:7-php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${SITE_PORT:-8088}:80"
+    environment: &wp_env
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${DB_NAME:-sammav}
+      WORDPRESS_DB_USER: ${DB_USER:-sammav}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-sammav}
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+        define( 'SAMMAV_SMTP_HOST', 'mailpit' );
+        define( 'SAMMAV_SMTP_PORT', 1025 );
+        define( 'DISALLOW_FILE_EDIT', true );
+    volumes: &wp_volumes
+      - wp_core:/var/www/html
+      - ./wp-content/themes/sammav:/var/www/html/wp-content/themes/sammav
+      - ./wp-content/plugins/sammav-core:/var/www/html/wp-content/plugins/sammav-core
+      - ./scripts/seed:/seed:ro
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    user: "33:33"
+    depends_on:
+      - wordpress
+    environment: *wp_env
+    volumes: *wp_volumes
+    profiles: ["tools"]
+    entrypoint: ["wp"]
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "${MAIL_UI_PORT:-8025}:8025"
+
+volumes:
+  db_data:
+  wp_core:

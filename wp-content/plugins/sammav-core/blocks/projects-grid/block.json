@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sammav/projects-grid",
+	"title": "Projects grid",
+	"category": "sammav",
+	"description": "All projects with category filters and load more.",
+	"textdomain": "sammav-core",
+	"attributes": {
+		"perPage": {
+			"type": "number",
+			"default": 9
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

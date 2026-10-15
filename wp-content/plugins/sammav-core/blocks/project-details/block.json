@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sammav/project-details",
+	"title": "Project details",
+	"category": "sammav",
+	"description": "Challenge, solution, results, gallery and related projects for the current project.",
+	"textdomain": "sammav-core",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js",
+	"usesContext": [
+		"postId",
+		"postType"
+	]
+}
