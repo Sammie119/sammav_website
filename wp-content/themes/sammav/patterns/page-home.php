@@ -16,9 +16,5 @@
 
 <!-- wp:pattern {"slug":"sammav/stats"} /-->
 
-<!-- wp:pattern {"slug":"sammav/testimonials-section"} /-->
-
-<!-- wp:pattern {"slug":"sammav/clients"} /-->
-
 <!-- wp:pattern {"slug":"sammav/cta"} /-->
 

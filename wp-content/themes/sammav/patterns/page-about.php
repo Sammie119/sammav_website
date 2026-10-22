@@ -14,11 +14,5 @@
 
 <!-- wp:pattern {"slug":"sammav/process"} /-->
 
-<!-- wp:pattern {"slug":"sammav/team-section"} /-->
-
-<!-- wp:pattern {"slug":"sammav/certifications"} /-->
-
-<!-- wp:pattern {"slug":"sammav/history"} /-->
-
 <!-- wp:pattern {"slug":"sammav/cta"} /-->
 
