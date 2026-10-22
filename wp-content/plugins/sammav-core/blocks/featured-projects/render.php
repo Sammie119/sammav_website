@@ -13,8 +13,7 @@ $projects = get_posts(
 		'posts_per_page' => max( 1, (int) ( $attributes['count'] ?? 3 ) ),
 		'meta_key'       => 'sv_featured', // phpcs:ignore WordPress.DB.SlowDBQuery
 		'meta_value'     => '1', // phpcs:ignore WordPress.DB.SlowDBQuery
-		'orderby'        => 'date',
-		'order'          => 'DESC',
+		'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
 	)
 );
 

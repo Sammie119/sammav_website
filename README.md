@@ -51,6 +51,10 @@ php scripts/generate-images.php            # regenerate placeholder images (need
 
 The footer, Contact page and structured data all read contact details from **Settings → Sammav**, so each detail is entered once.
 
+The portfolio (TACMS, eMemo, TAC ERP and the other projects) is defined in `scripts/seed/projects.php`.
+Edit it and run `docker compose run --rm wpcli eval-file /seed/seed.php` to update the site, or edit projects
+directly in the dashboard. Re-running the seed overwrites dashboard edits to those projects.
+
 ## How the SRS is covered
 
 | SRS | Where |

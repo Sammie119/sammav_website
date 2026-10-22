@@ -102,12 +102,12 @@ $palettes = array(
 	array( array( 49, 46, 129 ), array( 11, 61, 145 ) ),
 );
 
-for ( $p = 1; $p <= 6; $p++ ) {
-	[ $from, $to ] = $palettes[ $p - 1 ];
-	sammav_placeholder( "$out/project-$p.jpg", 1600, 1000, $from, $to, $p * 11 );
-	for ( $g = 1; $g <= 3; $g++ ) {
-		sammav_placeholder( "$out/project-$p-gallery-$g.jpg", 1200, 900, $to, $from, $p * 100 + $g );
-	}
+// One cover per portfolio project (scripts/seed/projects.php), coloured by category.
+$portfolio = require __DIR__ . '/seed/projects.php';
+foreach ( $portfolio['projects'] as $i => $project ) {
+	$pal = array_search( $project['cat'], $portfolio['categories'], true );
+	[ $from, $to ] = $palettes[ ( false === $pal ? $i : $pal ) % count( $palettes ) ];
+	sammav_placeholder( "$out/cover-{$project['key']}.jpg", 1600, 1000, $from, $to, crc32( $project['key'] ) % 1000 );
 }
 
 $people = array( 'SD' => 0, 'AM' => 1, 'KO' => 2, 'EA' => 4 );

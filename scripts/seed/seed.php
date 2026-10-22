@@ -234,146 +234,88 @@ foreach ( $services as $i => [ $title, $icon, $text ] ) {
 }
 
 // ---------------------------------------------------------------------------
-WP_CLI::log( 'Project categories' );
+WP_CLI::log( 'Projects' );
+
+$portfolio = require $seed_dir . '/projects.php';
+
+// Remove the original placeholder projects (and their images) from earlier versions of this seed.
+$placeholder_keys = array(
+	'project:branch-network-upgrade-for-gold-coast-bank',
+	'project:patient-records-system-for-volta-health',
+	'project:e-commerce-website-for-acme-logistics',
+	'project:campus-wi-fi-for-kumasi-schools',
+	'project:cloud-migration-for-a-financial-services-firm',
+	'project:inventory-app-for-tema-port-co',
+);
+foreach ( $placeholder_keys as $old_key ) {
+	$old_id = sv_seed_find( $old_key, 'sv_project' );
+	if ( ! $old_id ) {
+		continue;
+	}
+	foreach ( get_attached_media( 'image', $old_id ) as $media ) {
+		wp_delete_attachment( $media->ID, true );
+	}
+	wp_delete_post( $old_id, true );
+	WP_CLI::log( "  removed placeholder: $old_key" );
+}
 
 $cats = array();
-foreach ( array( 'Web', 'Networking', 'Software', 'Infrastructure' ) as $name ) {
+foreach ( $portfolio['categories'] as $name ) {
 	$term = term_exists( $name, 'sv_project_category' ) ?: wp_insert_term( $name, 'sv_project_category' );
 	$cats[ $name ] = (int) ( is_array( $term ) ? $term['term_id'] : $term );
 }
 
-// ---------------------------------------------------------------------------
-WP_CLI::log( 'Projects' );
-
-$projects = array(
-	array(
-		'title'      => 'Branch Network Upgrade for Gold Coast Bank',
-		'cat'        => 'Networking',
-		'client'     => 'Gold Coast Bank',
-		'date'       => '2026-08-20',
-		'featured'   => true,
-		'summary'    => 'Redesigned the WAN and Wi-Fi for 14 branches, cutting downtime and doubling bandwidth.',
-		'overview'   => 'Gold Coast Bank needed a faster, more secure network to support new digital banking services across its branches.',
-		'challenge'  => "Branches relied on ageing switches and a flat network, causing frequent outages and slow core-banking sessions during peak hours.",
-		'solution'   => "We designed a segmented SD-WAN with redundant links, replaced switching and Wi-Fi in every branch, and set up central monitoring with alerting.",
-		'results'    => "Network downtime reduced by 85%\nBandwidth per branch doubled\nAll branches upgraded over weekends with zero business disruption",
-		'tech'       => 'Cisco Meraki, SD-WAN, VLANs, Fortinet',
-		'testimonial' => 'Sammav planned every branch cut-over around our opening hours. Our staff barely noticed the change, except that everything got faster.',
-	),
-	array(
-		'title'      => 'Patient Records System for Volta Health',
-		'cat'        => 'Software',
-		'client'     => 'Volta Health',
-		'date'       => '2026-05-12',
-		'featured'   => true,
-		'summary'    => 'A secure web-based patient records and appointments system for a network of five clinics.',
-		'overview'   => 'Volta Health wanted to move from paper files to a single digital record shared securely across its clinics.',
-		'challenge'  => 'Patient files were kept on paper at each clinic, making referrals slow and records easy to lose.',
-		'solution'   => 'We built a role-based records and appointment system with offline support for clinics with unreliable internet, plus SMS reminders for patients.',
-		'results'    => "Appointment no-shows down 30%\nRecords available across all five clinics\nStaff trained in two weeks",
-		'tech'       => 'Laravel, Vue.js, PostgreSQL, AWS',
-		'testimonial' => '',
-	),
-	array(
-		'title'      => 'E-commerce Website for Acme Logistics',
-		'cat'        => 'Web',
-		'client'     => 'Acme Logistics',
-		'date'       => '2026-02-03',
-		'featured'   => true,
-		'summary'    => 'A fast, mobile-first website with online shipment booking and tracking.',
-		'overview'   => 'Acme Logistics needed a modern website that lets customers book and track shipments without calling the office.',
-		'challenge'  => 'The old website was slow on mobile and all bookings were made by phone, overloading the customer service team.',
-		'solution'   => 'We designed and built a WordPress site with a custom booking and tracking module integrated with their dispatch system and Mobile Money payments.',
-		'results'    => "60% of bookings now made online\nPage load under 2 seconds on 4G\nCustomer service calls reduced by 40%",
-		'tech'       => 'WordPress, PHP, REST API, Mobile Money',
-		'testimonial' => 'Our customers love being able to book and track online. The site paid for itself within months.',
-	),
-	array(
-		'title'      => 'Campus Wi-Fi for Kumasi Schools',
-		'cat'        => 'Infrastructure',
-		'client'     => 'Kumasi Schools',
-		'date'       => '2025-11-15',
-		'featured'   => false,
-		'summary'    => 'Campus-wide Wi-Fi and content filtering for three secondary schools.',
-		'overview'   => 'Three schools needed reliable Wi-Fi for e-learning across classrooms, labs and dormitories.',
-		'challenge'  => 'Coverage was patchy, there was no content filtering and the network could not handle hundreds of student devices.',
-		'solution'   => 'We surveyed each site, installed managed access points with solar-backed power, and set up content filtering and per-user bandwidth controls.',
-		'results'    => "Full coverage across 3 campuses\n1,500+ concurrent devices supported\nSafe browsing for all students",
-		'tech'       => 'Ubiquiti UniFi, pfSense, Solar UPS',
-		'testimonial' => '',
-	),
-	array(
-		'title'      => 'Cloud Migration for a Financial Services Firm',
-		'cat'        => 'Infrastructure',
-		'client'     => 'Confidential',
-		'hide'       => true,
-		'date'       => '2025-08-30',
-		'featured'   => false,
-		'summary'    => 'Moved on-premise servers and email to Microsoft 365 and Azure with zero data loss.',
-		'overview'   => 'A regulated financial services firm needed to retire ageing servers and move to the cloud securely.',
-		'challenge'  => 'Ageing on-premise servers were near end of life, backups were manual and remote work was difficult.',
-		'solution'   => 'We planned a phased migration to Microsoft 365 and Azure, with MFA, conditional access and automated backups, all within regulatory requirements.',
-		'results'    => "Zero data loss during migration\nIT running costs down 25%\nSecure remote access for all staff",
-		'tech'       => 'Microsoft 365, Azure, Intune, Veeam',
-		'testimonial' => '',
-	),
-	array(
-		'title'      => 'Inventory App for Tema Port Co.',
-		'cat'        => 'Software',
-		'client'     => 'Tema Port Co.',
-		'date'       => '2025-06-10',
-		'featured'   => false,
-		'summary'    => 'A mobile barcode inventory app that replaced spreadsheets in three warehouses.',
-		'overview'   => 'Tema Port Co. wanted real-time stock visibility across its warehouses.',
-		'challenge'  => 'Stock was tracked in spreadsheets updated at the end of each day, leading to errors and lost items.',
-		'solution'   => 'We built an Android barcode-scanning app with a web dashboard and real-time sync, integrated with their accounting software.',
-		'results'    => "Stock accuracy above 99%\nMonthly stock count time cut from 3 days to 4 hours\nReal-time reports for management",
-		'tech'       => 'Flutter, Node.js, MySQL',
-		'testimonial' => '',
-	),
-);
-
-foreach ( $projects as $i => $p ) {
-	$n   = $i + 1;
-	$key = 'project:' . sanitize_title( $p['title'] );
-	$id  = sv_seed_find( $key, 'sv_project' );
-	if ( $id ) {
-		WP_CLI::log( "  exists: {$p['title']}" );
-		continue;
-	}
-	$id = sv_seed_post(
-		$key,
-		array(
-			'post_type'    => 'sv_project',
-			'post_title'   => $p['title'],
-			'post_excerpt' => $p['summary'],
-			'post_content' => "<!-- wp:paragraph -->\n<p>{$p['overview']}</p>\n<!-- /wp:paragraph -->",
-			'post_date'    => $p['date'] . ' 09:00:00',
-		),
-		array(
-			'sv_featured'     => $p['featured'] ? '1' : '',
-			'sv_client'       => $p['client'],
-			'sv_hide_client'  => ! empty( $p['hide'] ) ? '1' : '',
-			'sv_completed'    => $p['date'],
-			'sv_summary'      => $p['summary'],
-			'sv_challenge'    => $p['challenge'],
-			'sv_solution'     => $p['solution'],
-			'sv_results'      => $p['results'],
-			'sv_technologies' => $p['tech'],
-			'sv_testimonial'  => $p['testimonial'],
-		)
+// Create or update every project so edits in projects.php reach the site on re-run.
+foreach ( $portfolio['projects'] as $i => $p ) {
+	$key  = 'project:' . $p['key'];
+	$id   = sv_seed_find( $key, 'sv_project' );
+	$date = $p['date'] ?: gmdate( 'Y-m-d' );
+	$post = array(
+		'post_type'    => 'sv_project',
+		'post_title'   => $p['title'],
+		'post_name'    => sanitize_title( $p['key'] ),
+		'post_excerpt' => $p['summary'],
+		'post_content' => "<!-- wp:paragraph -->\n<p>" . esc_html( $p['overview'] ) . "</p>\n<!-- /wp:paragraph -->",
+		'post_date'    => $date . ' 09:00:00',
+		'menu_order'   => (int) $p['order'],
 	);
+	if ( $id ) {
+		wp_update_post( array_merge( $post, array( 'ID' => $id ) ) );
+		WP_CLI::log( "  updated: {$p['title']}" );
+	} else {
+		$id = sv_seed_post( $key, $post );
+	}
+	$meta = array(
+		'sv_featured'     => $p['featured'] ? '1' : '',
+		'sv_client'       => $p['client'],
+		'sv_hide_client'  => '',
+		'sv_completed'    => $p['date'],
+		'sv_summary'      => $p['summary'],
+		'sv_challenge'    => $p['challenge'],
+		'sv_solution'     => $p['solution'],
+		'sv_results'      => $p['results'],
+		'sv_technologies' => $p['tech'],
+		'sv_testimonial'  => '',
+		'sv_gallery'      => '',
+	);
+	foreach ( $meta as $k => $v ) {
+		update_post_meta( $id, $k, $v );
+	}
 	wp_set_object_terms( $id, array( $cats[ $p['cat'] ] ), 'sv_project_category' );
 
-	$cover = sv_seed_image( "$seed_dir/images/project-$n.jpg", $p['title'], $id );
-	if ( $cover ) {
-		set_post_thumbnail( $id, $cover );
+	if ( ! has_post_thumbnail( $id ) ) {
+		$cover = sv_seed_image( "$seed_dir/images/cover-{$p['key']}.jpg", $p['title'], $id );
+		if ( $cover ) {
+			set_post_thumbnail( $id, $cover );
+		}
 	}
-	$gallery = array();
-	for ( $g = 1; $g <= 3; $g++ ) {
-		$gallery[] = sv_seed_image( "$seed_dir/images/project-$n-gallery-$g.jpg", "{$p['title']} — photo $g", $id );
+}
+
+// Remove categories no longer used (names are stored HTML-encoded, e.g. "&amp;").
+foreach ( get_terms( array( 'taxonomy' => 'sv_project_category', 'hide_empty' => false ) ) as $term ) {
+	if ( ! in_array( html_entity_decode( $term->name ), $portfolio['categories'], true ) && 0 === (int) $term->count ) {
+		wp_delete_term( $term->term_id, 'sv_project_category' );
 	}
-	update_post_meta( $id, 'sv_gallery', implode( ',', array_filter( $gallery ) ) );
 }
 
 // ---------------------------------------------------------------------------
