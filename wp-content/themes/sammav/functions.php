@@ -57,6 +57,44 @@ add_filter(
 );
 
 /**
+ * Logo: the site title block renders the logo mark plus a two-line wordmark
+ * ("Sammav" / "IT Services"). The site name stays editable under Settings → General.
+ */
+add_filter(
+	'render_block_core/site-title',
+	static function ( string $html ) {
+		$name = wp_strip_all_tags( get_bloginfo( 'name' ) );
+		if ( '' === $name ) {
+			return $html;
+		}
+		$parts = preg_split( '/\s+/', $name, 2 );
+		$logo  = sprintf(
+			'<img class="sv-logo__mark" src="%1$s" width="40" height="40" alt=""><span class="sv-logo__text"><span class="sv-logo__name">%2$s</span>%3$s</span>',
+			esc_url( get_theme_file_uri( 'assets/images/logo-mark.svg' ) ),
+			esc_html( $parts[0] ),
+			isset( $parts[1] ) ? ' <span class="sv-logo__tag">' . esc_html( $parts[1] ) . '</span>' : ''
+		);
+		return (string) preg_replace( '#(<a\b[^>]*>).*?(</a>)#s', '$1' . $logo . '$2', $html, 1 );
+	}
+);
+
+/**
+ * Browser tab and home-screen icons, unless a Site Icon is set in the Customizer.
+ */
+add_action(
+	'wp_head',
+	static function () {
+		if ( has_site_icon() ) {
+			return;
+		}
+		printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( get_theme_file_uri( 'assets/images/logo-mark.svg' ) ) );
+		printf( '<link rel="alternate icon" href="%s" type="image/png" sizes="32x32">' . "\n", esc_url( get_theme_file_uri( 'assets/images/favicon-32.png' ) ) );
+		printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( get_theme_file_uri( 'assets/images/apple-touch-icon.png' ) ) );
+	},
+	2
+);
+
+/**
  * Floating WhatsApp button (FR-G7) and cookie consent banner (FR-G9).
  */
 add_action(

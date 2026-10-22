@@ -60,14 +60,13 @@ img { max-width: 100%; height: auto; }
 .sv-header__nav { gap: 1.5rem; }
 
 .sv-logo { margin: 0; line-height: 1; }
-.sv-logo a { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-.sv-logo a::before {
-	content: "S"; display: inline-grid; place-items: center;
-	width: 2.25rem; height: 2.25rem; border-radius: 10px;
-	background: linear-gradient(135deg, var(--sv-primary), var(--sv-teal));
-	color: #fff; font-weight: 800; font-size: 1.15rem;
-}
-.sv-logo--light a { color: #fff !important; }
+.sv-logo a { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+.sv-logo__mark { width: 40px; height: 40px; flex-shrink: 0; }
+.sv-logo__text { display: flex; flex-direction: column; }
+.sv-logo__name { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; color: var(--sv-primary); line-height: 1; }
+.sv-logo__tag { margin-top: 0.3rem; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sv-teal); line-height: 1; }
+.sv-logo--light .sv-logo__name { color: #fff; }
+.sv-logo--light .sv-logo__tag { color: var(--sv-cyan); }
 
 .sv-primary-nav .wp-block-navigation-item__content {
 	padding: 0.5rem 0.75rem; border-radius: 8px; text-decoration: none;
