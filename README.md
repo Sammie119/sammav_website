@@ -47,6 +47,8 @@ php scripts/generate-images.php            # regenerate placeholder images (need
 | Team members | **Team** (featured image = photo) |
 | Phone, email, address, hours, WhatsApp, map, social links, Google Analytics ID, spam protection keys | **Settings** → **Sammav** |
 | Menu | **Appearance** → **Editor** → Navigation |
+| Footer "Quick links" (includes Terms & Conditions) | **Appearance** → **Editor** → Patterns → Footer |
+| Terms & Conditions, Privacy Policy | **Pages** |
 | Enquiries from the contact form | **Enquiries** (view, reply, **Export CSV**) |
 
 The footer, Contact page and structured data all read contact details from **Settings → Sammav**, so each detail is entered once.
@@ -81,7 +83,7 @@ behind page caching.
 These depend on the production host and are not part of the local stack:
 
 - [ ] Replace placeholder content: logo, copy, projects, team, testimonials, client names, statistics, contact details
-- [ ] Have the Privacy Policy reviewed
+- [ ] Have the Privacy Policy and Terms & Conditions reviewed
 - [ ] Hosting with PHP 8.2+, MySQL 8 / MariaDB 10.6+, HTTPS and HTTP→HTTPS redirect (NFR-5)
 - [ ] Real email delivery: install **WP Mail SMTP** (or define `SAMMAV_SMTP_HOST/PORT/USER/PASS/SECURE` in `wp-config.php`) and set SPF, DKIM, DMARC
 - [ ] Security: **Wordfence** (firewall, login limits, malware scan) and 2FA for administrators (NFR-6, NFR-7)

@@ -156,6 +156,193 @@ if ( $core_privacy && ! get_post_meta( $core_privacy->ID, '_sv_seed', true ) ) {
 }
 $privacy = sv_seed_post( 'page:privacy', array( 'post_type' => 'page', 'post_title' => 'Privacy Policy', 'post_name' => 'privacy-policy', 'post_content' => $privacy_content, 'menu_order' => 9 ) );
 
+$terms_content = <<<'HTML'
+<!-- wp:paragraph -->
+<p><strong>Last updated: 23 October 2026.</strong> <strong>Placeholder text: have it reviewed by a Ghanaian lawyer before launch.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>These Terms and Conditions ("Terms") govern your use of this website, operated by Sammav IT Services ("Sammav", "we", "us" or "our"), a business based in Accra, Ghana. By accessing or using the website you agree to these Terms. If you do not agree, please do not use the website.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">1. About this website</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This website provides information about Sammav, the IT services we offer (including networking and infrastructure, software development, web design and development, IT support and maintenance, cloud and hosting, and cybersecurity) and examples of our past work. It also lets you contact us and request a quote.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">2. Information on the website</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>We take reasonable care to keep the content of this website accurate and up to date, but it is provided for general information only. It is not professional, technical or legal advice for your particular situation, and it does not form part of any contract. Service descriptions, project examples, figures and timelines are illustrative and may change without notice.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">3. Enquiries, quotes and services</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Submitting an enquiry or quote request through the website, by email, by phone or on WhatsApp does not create a contract or oblige either party to proceed.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Any quote we give is an estimate based on the information you provide. Unless it states otherwise, a quote is valid for 30 days and may be revised if the scope, requirements or third-party costs (such as hardware, licences or hosting) change.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>All services are provided under a separate written agreement, proposal or statement of work signed or accepted by both parties. That agreement sets out the scope, deliverables, fees, payment terms, timelines, warranties and support arrangements. If it conflicts with these Terms, the agreement prevails.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>You agree that the information you give us when making an enquiry is accurate and that you are authorised to make it on behalf of any organisation you name.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">4. Intellectual property</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Unless stated otherwise, the content of this website, including text, graphics, the Sammav name and logo, page designs, images and code, is owned by or licensed to Sammav and is protected by the Copyright Act, 2005 (Act 690) and other applicable laws. You may view, download and print pages for your own personal or internal business use. You may not copy, reproduce, republish, modify, sell or otherwise exploit any content without our prior written permission.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Project names, client names, logos and trademarks shown in our portfolio belong to their respective owners and are shown for the purpose of describing our work. Their appearance does not grant you any right to use them. Ownership of software, websites and other deliverables we create for clients is governed by the relevant client agreement, not by these Terms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">5. Acceptable use</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>You must use this website lawfully and must not:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>attempt to gain unauthorised access to the website, its server, its database or any connected system, or test its security without our written permission;</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>introduce viruses, malware or other harmful code, or interfere with the website's operation, for example through denial-of-service attacks;</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>use automated tools to scrape, harvest or collect content or data from the website, or to submit forms;</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>send spam, unsolicited advertising, or false, misleading, abusive, defamatory or unlawful material through our contact form or other channels;</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>impersonate any person or organisation or misrepresent your connection with them.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Misuse may be an offence under the Electronic Transactions Act, 2008 (Act 772) or the Cybersecurity Act, 2020 (Act 1038). We may block access, delete submissions and report misuse to the relevant authorities.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">6. Privacy and cookies</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>We handle personal data in line with the Data Protection Act, 2012 (Act 843). Our <a href="/privacy-policy/">Privacy Policy</a> explains what we collect, including through the contact form and analytics cookies, how we use it, how long we keep it and your rights. Analytics cookies are only set if you accept them in the cookie banner.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">7. Third-party links and services</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This website may link to, or use, services run by third parties, such as WhatsApp, Google Maps, Google Analytics, Cloudflare and social media platforms. We do not control these services and are not responsible for their content, availability or privacy practices. Your use of them is subject to their own terms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">8. Availability of the website</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>We aim to keep the website available at all times but do not guarantee that it will be uninterrupted, secure or error-free. We may suspend, change or withdraw any part of it at any time, for example for maintenance or updates, without notice. Support commitments for client systems are set out in the relevant client agreement, not on this website.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">9. Disclaimer</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>To the fullest extent permitted by law, the website and its content are provided "as is" and "as available", without warranties of any kind, whether express or implied, including warranties of accuracy, fitness for a particular purpose and non-infringement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">10. Limitation of liability</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>To the fullest extent permitted by law, Sammav is not liable for any loss or damage arising from your use of, or inability to use, this website or from reliance on its content, including loss of profit, revenue, data or business opportunity, or any indirect or consequential loss. Nothing in these Terms excludes or limits liability that cannot be excluded or limited under the laws of Ghana, including liability for fraud or for death or personal injury caused by negligence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">11. Indemnity</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>You agree to indemnify Sammav against any claims, losses and reasonable costs, including legal fees, arising from your breach of these Terms or your misuse of the website.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">12. Changes to these Terms</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>We may update these Terms from time to time. The updated version will be posted on this page with a new "Last updated" date and applies from the date it is posted. Please check this page regularly. Continuing to use the website after a change means you accept the updated Terms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">13. Governing law and disputes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>These Terms are governed by the laws of the Republic of Ghana. We will first try to resolve any dispute informally. If that fails, either party may refer the dispute to mediation under the Alternative Dispute Resolution Act, 2010 (Act 798). Otherwise, the courts of Ghana have exclusive jurisdiction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">14. General</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>If any part of these Terms is found to be invalid or unenforceable, the rest remains in effect. If we do not enforce a right under these Terms, that does not waive the right. These Terms, together with our Privacy Policy, are the entire agreement between you and Sammav about your use of the website.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">15. Contact us</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>If you have questions about these Terms, contact Sammav IT Services:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"sv-contact-line"} -->
+<p class="sv-contact-line">[sammav field="email" link="mailto" icon="mail"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"sv-contact-line"} -->
+<p class="sv-contact-line">[sammav field="phone" link="tel" icon="phone"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"sv-contact-line"} -->
+<p class="sv-contact-line">[sammav field="address" icon="pin"]</p>
+<!-- /wp:paragraph -->
+HTML;
+$terms = sv_seed_post( 'page:terms', array( 'post_type' => 'page', 'post_title' => 'Terms & Conditions', 'post_name' => 'terms-and-conditions', 'post_content' => $terms_content, 'post_excerpt' => 'The terms that apply to your use of the Sammav IT Services website.', 'menu_order' => 10 ) );
+
 update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $home );
 update_option( 'wp_page_for_privacy_policy', $privacy );
